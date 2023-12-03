@@ -1,0 +1,36 @@
+
+const UserModel = mongoose.model('UserModel');
+
+const fs = require('fs');
+
+const raw = fs.readFileSync('./heliverse_mock_data.json')
+const parsedData = JSON.parse(raw)
+console.log(parsedData) 
+ 
+for (let each of parsedData){
+    UserModel.insertMany({userId: each.id, firstName: each.first_name, lastName: each.last_name, email: each.email, gender: each.gender, available: each.available, avatar: each.avatar, domain: each.domain})
+} 
+
+
+
+
+
+       
+if (users !== null) {
+    filteredUsers = users.filter((user) => {
+        if (
+            user.firstName.toLowerCase().includes(searchTerm) ||
+            user.lastName.toLowerCase().includes(searchTerm) 
+        ) {
+            return true;
+        } else if (domain !== "" && user.domain.toLowerCase().includes(domain)) {
+            return true;
+        } else if (gender !== "" && user.gender.toLowerCase().includes(gender)) {
+            return true;
+        } else if (availability !== "" && user.availability.toLowerCase().includes(availability)) {
+            return true;
+        }
+
+        return false;
+    });
+}
